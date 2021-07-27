@@ -1,0 +1,13 @@
+const config = {
+    general:{
+        local:"en",
+    },
+    discord: {
+        clientId: "",
+        channel: ""
+    },
+    newworld:{
+        server: "Peta",
+        serverStatusUrl: ""
+    }
+}
