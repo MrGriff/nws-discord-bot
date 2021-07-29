@@ -1,5 +1,6 @@
 export const fr = {
     hello: 'Hello World',
+    login_succeded: 'Authentifié avec success',
     interpolation: (what: string, how: string) => `${what} is ${how}`,
     dateFormat: (date: Date) => `The current date is ${formatDate(date, 'MM/DD/YYYY')}`,
     keyWithCount: (count: number) => `${count} item${count === 1 ? '' : 's'}`
