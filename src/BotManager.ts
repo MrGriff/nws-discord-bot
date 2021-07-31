@@ -13,7 +13,7 @@ export class BotManager {
     }
 
     init(){
-        this.message = Messages.messagesOf('fr');
+        this.message = Messages.messagesOf(config.general.local);
         this.client.on("ready", this.start);
         this.client.on("message", (msg: Message) => {this.listening(msg)});
         console.log(this.message.hello)
