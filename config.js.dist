@@ -3,11 +3,21 @@ const config = {
         local:"en",
     },
     discord: {
-        clientId: "",
-        channel: ""
+        clientId: "[YOUR DISCORD CLIENT ID]",
+        channel: "[THE CHANNEL NAME WHERE YOU WANT BE NOTIFIED]",
+        commands: {
+            up: "!up"
+        }
     },
     newworld:{
-        server: "Peta",
-        serverStatusUrl: ""
+        server: "[THE SERVER NAME YOU WANT TO AUTOMATICALY CHECK (case sensitive)]",
+        serverStatusUrl: "https://www.newworld.com/fr-fr/support/server-status"
+    },
+    scrap:{
+        server: "ags-ServerStatus-content-responses-response-server",
+        serverName: "name",
+        serverDown: "status--down"
     }
 }
+
+module.exports = config;
