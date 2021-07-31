@@ -119,6 +119,7 @@ export class Bot {
     }
 
     public getServer(serverName: string):Server{
+      //TODO: if scrapping is stopped, scrap before getting the server
       return this.servers.find((server:Server)=>{
         if(server.name === serverName){
           return server;

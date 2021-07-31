@@ -28,11 +28,11 @@ export class BotManager {
     }
 
     stop(){
-    
+        //TODO: A stop scrapping command
     }
 
     retry(){
-    
+        //TODO: A retry scrapping command
     }
 
     listening(msg: Message){
