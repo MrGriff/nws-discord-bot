@@ -19,7 +19,7 @@ export class Bot {
     constructor(client: Client){
         this.client = client;
         this.channel = client.channels.cache.find((channel:TextChannel) => channel.name === config.discord.channelName) as TextChannel; ;
-        this.message = Messages.messagesOf('fr');
+        this.message = Messages.messagesOf(config.general.local);
         this.running = false;
         this.servers = [];
         this.serverClass = config.scrap.server;
@@ -45,7 +45,7 @@ export class Bot {
     public start(){
       setInterval(()=>{
         this.scrap();
-      }, 5000);
+      }, 30000);
     }
 
     public async scrap(){
