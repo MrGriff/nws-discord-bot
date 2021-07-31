@@ -3,7 +3,7 @@ const config = {
         local:"en",
     },
     discord: {
-        clientId: "", //YOUR DISCORD CLIENT ID
+        token: "", //YOUR DISCORD BOT TOKEN
         channel: "", //THE CHANNEL NAME WHERE YOU WANT BE NOTIFIED
         commands: {
             up: "!up"
