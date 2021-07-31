@@ -76,20 +76,20 @@ export class Bot {
       if(server){
         if( server.isUp){
           if(this.lastUp !== server.isUp){
-            this.sendToChannel('Peta vient de passer en ligne ! 😀');
+            this.sendToChannel(this.message.channel_server_up(this.config.newworld.server));
           }
-          console.log('✔️ Peta est up ✔️')
-          this.updateActivity('✔️ Peta est up ✔️');
+          console.log(this.message.activity_server_up(this.config.newworld.server));
+          this.updateActivity(this.message.activity_server_up(this.config.newworld.server));
         } else {
           if(this.lastUp !== server.isUp){
-            this.sendToChannel('Peta vient de passer en hors ligne ! 😭');
+            this.sendToChannel(this.message.channel_server_down(this.config.newworld.server));
           }
-          console.log('❌ Peta est down ❌');
-          this.updateActivity('❌ Peta est down ❌');
+          console.log(this.message.activity_server_down(this.config.newworld.server));
+          this.updateActivity(this.message.activity_server_down(this.config.newworld.server));
         }
         this.lastUp = server.isUp;
       } else {
-        console.log('Server not found');
+        console.log(this.message.error_server_not_found(this.config.newworld.server));
       }
     }
 

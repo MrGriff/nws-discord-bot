@@ -2,7 +2,11 @@ export const en = {
     hello: 'Hello World',
     login_succeded: 'Authentication succed',
     login_failed: 'Can\'t connect to discord',
-    interpolation: (what: string, how: string) => `${what} is ${how}`,
+    activity_server_up: (server: string) => `✔️ ${server} online ✔️`,
+    activity_server_down: (server: string) => `❌ ${server} offline ❌`,
+    channel_server_up: (server: string) => `✔️ ${server} just went online ! 😀`, 
+    channel_server_down: (server: string) => `✔️ ${server} just went offline ! 😭`, 
+    error_server_not_found: (server: string) => `⚠️ ${server} not found ⚠️`,
     dateFormat: (date: Date) => `The current date is ${formatDate(date, 'MM/DD/YYYY')}`,
     keyWithCount: (count: number) => `${count} item${count === 1 ? '' : 's'}`
   };
