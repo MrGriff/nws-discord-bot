@@ -1,0 +1,23 @@
+const config = {
+    general:{
+        local:"en",
+    },
+    discord: {
+        clientId: "", //YOUR DISCORD CLIENT ID
+        channel: "", //THE CHANNEL NAME WHERE YOU WANT BE NOTIFIED
+        commands: {
+            up: "!up"
+        }
+    },
+    newworld:{
+        server: "", //THE SERVER'S NAME YOU WANT TO AUTOMATICALLY CHECK (case sensitive)
+        serverStatusUrl: "https://www.newworld.com/fr-fr/support/server-status"
+    },
+    scrap:{
+        server: "ags-ServerStatus-content-responses-response-server",
+        serverName: "name",
+        serverDown: "status--down"
+    }
+}
+
+module.exports = config;
