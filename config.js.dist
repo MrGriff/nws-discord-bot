@@ -3,14 +3,14 @@ const config = {
         local:"en",
     },
     discord: {
-        clientId: "[YOUR DISCORD CLIENT ID]",
-        channel: "[THE CHANNEL NAME WHERE YOU WANT BE NOTIFIED]",
+        clientId: "", //YOUR DISCORD CLIENT ID
+        channel: "", //THE CHANNEL NAME WHERE YOU WANT BE NOTIFIED
         commands: {
             up: "!up"
         }
     },
     newworld:{
-        server: "[THE SERVER NAME YOU WANT TO AUTOMATICALY CHECK (case sensitive)]",
+        server: "", //THE SERVER'S NAME YOU WANT TO AUTOMATICALLY CHECK (case sensitive)
         serverStatusUrl: "https://www.newworld.com/fr-fr/support/server-status"
     },
     scrap:{
