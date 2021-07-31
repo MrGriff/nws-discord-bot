@@ -6,7 +6,7 @@ import { Server } from "./Server";
 import config from "../config.js";
 
 /**
- * Scrapping the status New World page and save the status of each servers
+ * scraping the status New World page and save the status of each servers
  * Bot
  */
 export class Bot {
@@ -50,7 +50,7 @@ export class Bot {
     }
 
     /**
-     * Start scrapping every 30000ms
+     * Start scraping every 30000ms
      */
     public start(){
       setInterval(()=>{
@@ -59,7 +59,7 @@ export class Bot {
     }
 
     /**
-     * Scrapping the status page
+     * scraping the status page
      */
     public async scrap(){
         this.servers = [];
@@ -158,7 +158,7 @@ export class Bot {
      * @returns 
      */
     public getServer(serverName: string):Server{
-      //TODO: if scrapping is stopped, scrap before getting the server
+      //TODO: if scraping is stopped, scrap before getting the server
       return this.servers.find((server:Server)=>{
         if(server.name === serverName){
           return server;
