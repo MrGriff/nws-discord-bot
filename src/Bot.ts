@@ -35,7 +35,7 @@ export class Bot {
      * Login the client
      */
     public login(){
-        this.client.login(config.discord.clientId)
+        this.client.login(config.discord.token)
         .catch(
           (e) => {
             throw(e);

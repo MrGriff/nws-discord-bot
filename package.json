@@ -1,6 +1,6 @@
 {
   "name": "nws-discord-bot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "New World Servers Status Discord Bot",
   "main": "dist/app.js",
   "scripts": {
