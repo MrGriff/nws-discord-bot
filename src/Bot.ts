@@ -1,16 +1,16 @@
-import {Client } from "discord.js";
-import {Message} from "./messages/Message";
-import {Got} from "got";
+import { Client, TextChannel } from "discord.js";
+import {Messages} from "./messages/Messages";
+import got from "got";
 import {JSDOM} from "jsdom";
-import Server from "./Server";
+import { Server } from "./Server";
 
-class Bot {
-
+export class Bot {
     client: Client;
-    got: Got;
+    channel: TextChannel;
     config: any;
     message: any;
     running: boolean;
+    lastUp: boolean;
     servers: Server[];
     serverClass: string;
     serverClassName: string;
@@ -18,8 +18,9 @@ class Bot {
 
     constructor(client: Client, config: any){
         this.client = client;
+        this.channel = client.channels.cache.find((channel:TextChannel) => channel.name === this.config.discord.channelName) as TextChannel; ;
         this.config = config;
-        this.message = Message.messagesOf('fr');
+        this.message = Messages.messagesOf('fr');
         this.running = false;
         this.servers = [];
         this.serverClass = this.config.scrap.server;
@@ -27,45 +28,89 @@ class Bot {
         this.serverClassDown = [this.serverClass, this.config.scrap.serverDown].join('-');
     }
 
-    login(){
-        this.client.login(this.config.discord.clientId);
-        console.log(this.message.login_succeded);
+    public login(){
+        this.client.login(this.config.discord.clientId)
+        .catch(
+          (e) => {
+            throw(e);
+          }
+        )
+        .then(
+          (e) => {
+            console.log(this.message.login_succeded);
+          }
+        );
+      
     }
 
-    async scrap(){
+    public start(){
+      setInterval(()=>{
+        this.scrap();
+      }, 5000);
+    }
+
+    public async scrap(){
         this.servers = [];
-        let response = await this.got(this.config.newworld);
-        let dom = new JSDOM(response.body);
-       
-        let nodeList = [...dom.window.document.querySelectorAll(this.serverClass)];
-        
-        nodeList.forEach(this.extractServerInfos);
+        await got(this.config.newworld.serverStatusUrl)
+        .then((response) => {
+          let dom = new JSDOM(response.body);
+          let nodeList = [...dom.window.document.querySelectorAll('.' + this.serverClass)];
+          nodeList.forEach((elm:HTMLElement) => {this.extractServerInfos(elm)});
+          this.notify();
+        }).catch(e =>{
+          throw(e);
+        });
+    }
+
+    public extractServerInfos(element :HTMLElement){
+        let server = new Server();
+        server.name = element.getElementsByClassName(this.serverClassName)[0].textContent.trim();
+        if(element.getElementsByClassName(this.serverClassDown).length === 0){
+            server.isUp = true;
+        }
+        this.servers.push(server);
+    }
+
+    public notify(){
+      let server = this.getServer(this.config.newworld.server);
+      if(server){
         if( server.isUp){
-          if(lastUp !== server.isUp){
-            channel.send('Peta vient de passer en ligne ! 😀');
+          if(this.lastUp !== server.isUp){
+            this.sendToChannel('Peta vient de passer en ligne ! 😀');
           }
           console.log('✔️ Peta est up ✔️')
-          client.user.setActivity('✔️ Peta est up ✔️');
+          this.updateActivity('✔️ Peta est up ✔️');
         } else {
-          if(lastUp !== server.isUp){
-            channel.send('Peta vient de passer en hors ligne ! 😭');
+          if(this.lastUp !== server.isUp){
+            this.sendToChannel('Peta vient de passer en hors ligne ! 😭');
           }
           console.log('❌ Peta est down ❌');
-          client.user.setActivity('❌ Peta est down ❌');
+          this.updateActivity('❌ Peta est down ❌');
         }
-        lastUp = isUp;
+        this.lastUp = server.isUp;
+      } else {
+        console.log('Server not found');
+      }
     }
 
-    extractServerInfos(element :HTMLElement){
-        let server = new Server();
-        server.name = element.getElementsByClassName(serverName)[0].textContent.trim();
-        if(element.getElementsByClassName(serverName)[0].textContent.indexOf(this.config.newworld.server) !== -1){
-            if(element.getElementsByClassName(serverDown).length === 0){
-                server.isUp = true;
-            }
+    public sendToChannel(msg:string){
+      if(this.channel !== undefined){
+        this.channel.send(msg);
+      }
+    }
+
+    public updateActivity(act:string){
+      this.client.user.setActivity(act);
+    }
+
+    public getServer(serverName: string):Server{
+      return this.servers.find((server:Server)=>{
+        if(server.name === serverName){
+          return server;
+        } else {
+          return false;
         }
+      });
     }
 
 }
-
-export = Bot;

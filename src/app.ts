@@ -1,4 +1,4 @@
-import BotManager from "./BotManager";
+import { BotManager } from "./BotManager";
 
 let botManager = new BotManager();
 

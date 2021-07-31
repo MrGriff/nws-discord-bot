@@ -1,4 +1,4 @@
-class Server{
+export class Server{
     isUp: boolean;
     name: string;
 
@@ -6,5 +6,3 @@ class Server{
         this.isUp = false;
     }
 }
-
-export = Server;

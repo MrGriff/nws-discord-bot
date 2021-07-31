@@ -4,7 +4,7 @@ import { fr as fr } from './fr';
 
 export const messages = fr;
 
-export namespace Message {
+export namespace Messages {
   // Languages for which messages are defined under this dir are acceptable
   export const acceptableLanguages = glob.sync(`${__dirname}/*.js`)
     .map((file) => path.basename(file, '.js'))
