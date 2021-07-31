@@ -9,13 +9,13 @@ export class BotManager {
     private message: any;
     constructor(){
         this.client = new Client();
-        this.bot = new Bot(this.client, config);
+        this.bot = new Bot(this.client);
     }
 
     init(){
         this.message = Messages.messagesOf('fr');
         this.client.on("ready", this.start);
-        this.client.on("message", this.listening);
+        this.client.on("message", (msg: Message) => {this.listening(msg)});
         console.log(this.message.hello)
         this.start();
     }
@@ -28,16 +28,23 @@ export class BotManager {
     }
 
     stop(){
-        
+    
     }
 
     retry(){
-
+    
     }
 
     listening(msg: Message){
-        if (msg.content === "!up") {
-            msg.reply("Peut-être peut-être pas, qui sait ? La relativité de l'univers et un tout que personne ne peut quantifier ou même imaginer. Je te laisse t'abandonner à toi et ton sub subconscient.");
+        if(this.bot === undefined) return;
+        let up = config.discord.commands.up;
+        if (msg.content.startsWith(up)) {
+            let serverName = msg.content.slice(up.length).trim();
+            if(serverName !== undefined && serverName !== ""){
+                this.bot.reply(msg, serverName);
+            } else {
+                this.bot.reply(msg, config.newworld.server);
+            }
         }
     }
 }
