@@ -20,7 +20,7 @@ export class BotManager {
 
     init(){
         this.message = Messages.messagesOf(config.general.local);
-        this.client.on("ready", () => {this.start()}); // When logged, start scrapping
+        this.client.on("ready", () => {this.start()}); // When logged, start scraping
         this.client.on("message", (msg: Message) => {this.listening(msg)}); // Enable the listener
         if(this.bot !== undefined){
             this.bot.login(); // Logon the bot
@@ -33,11 +33,11 @@ export class BotManager {
     }
 
     stop(){
-        //TODO: A stop scrapping command
+        //TODO: A stop scraping command
     }
 
     retry(){
-        //TODO: A retry scrapping command
+        //TODO: A retry scraping command
     }
 
     /**

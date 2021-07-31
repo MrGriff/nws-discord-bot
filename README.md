@@ -1,6 +1,6 @@
 # New World Server Status Discord Bot
 ## Setup
-Copy the config.js.dist file as config.js and entre your own variables
+Copy the config.js.dist file as config.js and enter your own variables
 
 Install dependecies
 
